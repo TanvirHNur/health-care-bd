@@ -15,14 +15,14 @@ const Login = () => {
   const  histroy=useHistory();
   const location=useLocation();
   const redirect_uri= location.state?.from || '/';
-  console.log(redirect_uri)
+  console.log(location.state?.from)
 
   const handleSignInWithGoogle =() =>{
           signInWithGoogle()
           .then(result => {
+            histroy.push(redirect_uri)
             setUser(result.user);
             setError('Logged in Successfully');
-            histroy.push(redirect_uri)
 
         })
         .catch(error=>{

@@ -13,7 +13,6 @@ const ServiceDetails = () => {
     } , [serviceId])
     // console.log(services)
         const service= services.find( s => s.id == serviceId);
-        console.log(service)
         const {img,title,description} =service || {};
     return (
         <div className="">

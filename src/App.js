@@ -32,9 +32,9 @@ function App() {
           <PrivateRoute path="/find-doctor">
               <FindDoctors></FindDoctors>
           </PrivateRoute>
-          <Route path="/blog">
+          <PrivateRoute path="/blog">
             <Blogs/>
-          </Route>
+          </PrivateRoute>
           <Route path="/login">
             <Login/>
           </Route>

@@ -19,30 +19,31 @@ const useFirebase=()=>{
             signInWithPopup(auth, GoogleProvider)
             .then(result => {
                 setUser(result.user);
-                console.log(result.user)
-                setError('Loged in Successfully')
+                setError('Loged in Successfully');
+                histroy.push('/')
             })
             .catch(error=>{
                 setError(error.message)
             })
     }
      
-    const createUser=(email, password, name)=>{
+    const createUser=(name, email, password)=>{
+        console.log(email,password,name)
         createUserWithEmailAndPassword(auth,email,password)
         .then( result =>{
+            console.log(result.user)
             setUser(result.user)
             updateProfile(auth.currentUser, {
                 displayName: name,
             })
-            console.log(result.user);
-            setError('Loged in Successfully')
-            
+            setError('Logged in Successfully');
         })
-        .then( () => {
-            histroy.push("/")
-        })
+        // .then(() => {
+        //     histroy.push('/')
+        // })
         .catch( error=>{
-            setError(error.message)
+            setError(error.message);
+            console.log(error.message)
         })
     }
 

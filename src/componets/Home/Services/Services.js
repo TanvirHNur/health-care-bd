@@ -5,7 +5,6 @@ import Service from '../Service/Service';
 
 const Services = () => {
     const {services} =useServices();
-
     return (
         <div>
             <div className="m-4"  id="services"> 
@@ -15,7 +14,7 @@ const Services = () => {
             </div>
             <Row xs={2} md={3} className="g-5 m-4">
             {
-                services.map( service=> <Service
+                services?.map( service=> <Service
                 key={service.id}
                 service={service}
                 ></Service>)

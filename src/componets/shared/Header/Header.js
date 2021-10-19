@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import useAuth from '../../../hooks/useAuth';
 import logo from '../../../images/Health .png';
 import './Header.css'
 
 const Header = () => {
   const {user, logOut} = useAuth();
-  console.log(user)
     return (
         <div>
              <Navbar collapseOnSelect sticky="top" expand="lg" className="my-nav-bg">
@@ -25,8 +25,7 @@ const Header = () => {
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
         <Nav.Link className="my-nav-link" as={Link} to="/home">Home</Nav.Link>
-        <Nav.Link className="my-nav-link" as={Link} to="/home#services">Services</Nav.Link>
-        <Nav.Link className="my-nav-link" as={Link} to="/home#why">Servic</Nav.Link>
+        <Nav.Link className="my-nav-link" as={HashLink} to="/home#services">Services</Nav.Link>
         <Nav.Link className="my-nav-link" as={Link} to="/find-doctor">Find a Doctor</Nav.Link>
         <Nav.Link className="my-nav-link" as={Link} to="/blog">Blog</Nav.Link>
         

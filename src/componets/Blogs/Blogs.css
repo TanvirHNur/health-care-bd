@@ -1,0 +1,21 @@
+.cover-text{
+    width: 70%;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(-1.25rem);
+    background: #fff;
+    margin: 0px 20px 0px 60px;
+    padding: 1.875rem 1.875rem 1.25rem;
+    text-align: center;
+    color: #1B3163;
+}
+.sub-cover{
+    background-color: #fef278;
+}
+
+
+@media only screen and (max-width:688px){
+    .cover-text{
+        position: relative;
+    }
+}

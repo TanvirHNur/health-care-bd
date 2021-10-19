@@ -8,7 +8,7 @@
 }
 .service-col{
     background-color: #F6F6F6;
-    height: 400px;
+    height: 415px;
 }
 
 .learn-more-btn{
@@ -23,4 +23,12 @@
 
 .learn-more-btn:hover{
     color: #e2231a;
+}
+
+
+@media only screen and (max-width:688px){
+    .service-col{
+        background-color: #F6F6F6;
+        height: 500px;
+    }
 }

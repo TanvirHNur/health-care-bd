@@ -1,0 +1,56 @@
+[
+    {
+      "id": 1,
+      "img": "https://i.ibb.co/PTCKT6j/200x200.png",
+      "name": "Richard Thomas Rindfuss",
+      "email": "rindfuss@gmail.com",
+      "hospital": "Health Care Medical Center",
+      "address": "House # 13/A(4th Floor, Road#35, Dhaka 1212",
+      "specialties": "Obstetrics and Gynecology (OBGYN)"
+    },
+    {
+      "id": 2,
+      "img": "https://i.ibb.co/kBPdtks/220x220.png",
+      "name": "Jeffrey Lewis Benjamin, MD",
+      "email": "benjamin@gmail.com",
+      "hospital": "Health Care Medical Center",
+      "address": "House # 13/A(4th Floor, Road#35, Dhaka 1212",
+      "specialties": "Neurology"
+    },
+    {
+      "id": 3,
+      "img": "https://i.ibb.co/wwYxwg4/420x420.png",
+      "name": "Paulo R. Selber, Md",
+      "email": "paulo@gmail.com",
+      "hospital": "Health Care Medical Center",
+      "address": "House # 13/A(4th Floor, Road#35, Dhaka 1212",
+      "specialties": "Orthopedic Surgery"
+    },
+    {
+      "id": 4,
+      "img": "https://i.ibb.co/473KZWL/803x803.png",
+      "name": "Benjamin Lebwohl, MD",
+      "email": "lebwohl@gmail.com",
+      "hospital": "Health Care Medical Center",
+      "address": "House # 13/A(4th Floor, Road#35, Dhaka 1212",
+      "specialties": "Gastroenterology"
+    },
+    {
+      "id": 5,
+      "img": "https://i.ibb.co/drLYByy/2400x2400.png",
+      "name": "Paul F. Kent, MD, PhD",
+      "email": "paul@gmail.com",
+      "hospital": "Health Care Medical Center",
+      "address": "House # 13/A(4th Floor, Road#35, Dhaka 1212",
+      "specialties": "Clinical Neurophysiology"
+    },
+    {
+      "id": 6,
+      "img": "https://i.ibb.co/s5n0d8T/199x199.png",
+      "name": "Tamatha B. Fenster, MD",
+      "email": "tamatha@gmail.com",
+      "hospital": "Health Care Medical Center",
+      "address": "House # 13/A(4th Floor, Road#35, Dhaka 1212",
+      "specialties": "Pediatrics"
+    }
+  ]

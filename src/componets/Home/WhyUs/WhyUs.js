@@ -11,7 +11,7 @@ const WhyUs = () => {
     return (
     <>
         <Row className="m-4">
-            <div className="col-12">
+            <div className="col-12" id="why">
                 <h1>Why Health Care</h1>
                 <p>
                 Located in the heart of Dhaka’s premier Orchard shopping district, Health care Centre is home to specialist doctors, nurses, and medical staff providing quality care across 30 different specialties and subspecialties. Able to communicate in multiple languages, our specialists use state-of-the-art technology to holistically serve your healthcare needs.

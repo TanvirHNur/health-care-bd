@@ -16,15 +16,8 @@ const useFirebase=()=>{
     const GoogleProvider=new GoogleAuthProvider();
 
     const signInWithGoogle=()=>{
-            signInWithPopup(auth, GoogleProvider)
-            .then(result => {
-                setUser(result.user);
-                setError('Loged in Successfully');
-                histroy.push('/')
-            })
-            .catch(error=>{
-                setError(error.message)
-            })
+          return  signInWithPopup(auth, GoogleProvider)
+            
     }
      
     const createUser=(name, email, password)=>{
@@ -80,7 +73,9 @@ const useFirebase=()=>{
     } , [])
     return {
         user,
+        setUser,
         error,
+        setUser,
         createUser,
         login,
         signInWithGoogle,

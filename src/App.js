@@ -6,11 +6,11 @@ import Home from './componets/Home/Home/Home';
 import ServiceDetails from './componets/ServiceDetails/ServiceDetails';
 import Footer from './componets/shared/Footer/Footer';
 import FindDoctors from './componets/FindDoctors/FindDoctors/FindDoctors';
-import Blogs from './componets/Blogs/Blogs';
 import Login from './componets/login/Login/Login';
 import Register from './componets/Register/Register';
 import AuthProvider from './contexts/AuthProvider';
 import PrivateRoute from './componets/login/PrivateRoute/PrivateRoute';
+import Blogs from './componets/Blogs/Blogs/Blogs';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
               <FindDoctors></FindDoctors>
           </PrivateRoute>
           <Route path="/blog">
-            <Blogs></Blogs>
+            <Blogs/>
           </Route>
           <Route path="/login">
             <Login/>

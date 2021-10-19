@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -16,10 +16,10 @@ const ServiceDetails = () => {
         console.log(service)
         const {img,title,description} =service || {};
     return (
-        <div className=" m-5">
-                 <Card  className="d-flex flex-row align-items-center">
-                     <Card.Img className="img-fluid" src={img} />
-                    <Card.Body>
+        <div className="">
+                 <Card  className="m-5 d-flex flex-row align-items-center row">
+                     <Card.Img className="img-fluid col-sm-12 col-md-6" src={img} />
+                    <Card.Body className=" col-sm-12 col-md-6">
                      <Card.Title>{title}</Card.Title>
                      <Card.Text>
                          {description}

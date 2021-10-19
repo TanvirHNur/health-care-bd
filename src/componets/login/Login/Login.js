@@ -5,11 +5,31 @@ import { Link } from 'react-router-dom';
 import './Login.css'
 import googleImg from '../../../images/google.png'
 import useAuth from '../../../hooks/useAuth';
+import { useHistory, useLocation } from 'react-router';
 
 const Login = () => {
-  const {signInWithGoogle, login, error}=useAuth();
+  const {signInWithGoogle, login, error, setUser, setError}=useAuth();
   const [email, setEmail]=useState('');
   const [password, setPassword]=useState('');
+
+  const  histroy=useHistory();
+  const location=useLocation();
+  const redirect_uri= location.state?.from || '/';
+  console.log(redirect_uri)
+
+  const handleSignInWithGoogle =() =>{
+          signInWithGoogle()
+          .then(result => {
+            setUser(result.user);
+            setError('Logged in Successfully');
+            histroy.push(redirect_uri)
+
+        })
+        .catch(error=>{
+            // setError(error.message)
+        })
+  }
+
   const handleForm=(e)=>{
     e.preventDefault();
   };
@@ -53,7 +73,7 @@ const Login = () => {
 <div>
             <h6 className="d-flex align-items-center">---------------Or---------------</h6>
             <div className="">
-            <button onClick={signInWithGoogle} className="btn googleSign"> <img src={googleImg} alt="" /> Sign in with Google</button>
+            <button onClick={handleSignInWithGoogle} className="btn googleSign"> <img src={googleImg} alt="" /> Sign in with Google</button>
             </div>
         </div>
         </div>

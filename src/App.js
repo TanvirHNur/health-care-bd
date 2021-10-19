@@ -11,6 +11,7 @@ import Register from './componets/Register/Register';
 import AuthProvider from './contexts/AuthProvider';
 import PrivateRoute from './componets/login/PrivateRoute/PrivateRoute';
 import Blogs from './componets/Blogs/Blogs/Blogs';
+import NotFound from './componets/NotFound/NotFound';
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/register">
             <Register/>
+          </Route>
+          <Route path="*">
+            <NotFound></NotFound>
           </Route>
         </Switch>
         <Footer></Footer>

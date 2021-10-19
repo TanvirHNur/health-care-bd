@@ -3,7 +3,7 @@
 
 <ul>
     <li>Health Care: The delivery of health care, health education, and health information services via remote technologies.</li>
-    <li>More Top Doctors than any hospital in the BDs</li>
+    <li>More Top Doctors than any hospital in the BD</li>
     <li>24/7 Treatment and support</li>
     <li>It will Make health care accessible to people who live in rural or isolated communities.</li>
     <li>Health care will provide The Best Telehealth Services</li>

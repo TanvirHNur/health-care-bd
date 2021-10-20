@@ -12,7 +12,7 @@ const Services = () => {
                 <h1 className=" ms-3" >Digital Health Services</h1>
                 <hr />
             </div>
-            <Row xs={2} md={3} className="g-5 m-4">
+            <Row xs={1} md={3} className="g-5 m-4">
             {
                 services?.map( service=> <Service
                 key={service.id}

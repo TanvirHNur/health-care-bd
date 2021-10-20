@@ -6,7 +6,7 @@ import './Service.css'
 const Service = ({service}) => {
     const {id, img, title, description}= service;
     return (
-        <div className="service">
+    <div className="service">
               <Col>
                  <Card  className="service-col">
                      <Card.Img variant="top" src={img} />

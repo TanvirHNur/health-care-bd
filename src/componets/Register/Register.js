@@ -4,13 +4,36 @@ import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import './Register.css'
-import googleImg from '../../images/google.png'
+import googleImg from '../../images/google.png';
+import { useHistory, useLocation } from 'react-router';
 
 const Register = () => {
-    const {signInWithGoogle, createUser, error}=useAuth();
+    const {signInWithGoogle, createUser, error, setIsLoading, setUser,setError}=useAuth();
     const [name, setName]=useState('');
     const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
+    const histroy= useHistory();
+
+    const location=useLocation();
+    const redirect_uri= location.state?.from || '/';
+
+    const handleSignInWithGoogle =() =>{
+      setIsLoading(true)
+      signInWithGoogle()
+      .then(result => {
+        histroy.push(redirect_uri)
+        setUser(result.user);
+        setError('Logged in Successfully');
+    })
+    .finally( () => {
+      setIsLoading(false)
+    })
+    .catch(error=>{
+        setError(error.message)
+    })
+}
+
+
   const handleForm=(e)=>{
     e.preventDefault();
   }
@@ -35,12 +58,12 @@ const Register = () => {
             <h1 className="text-info fs-3">Please Register</h1>
             <Form.Group className="mb-3" controlId="formBasicName">
     <Form.Label>Name</Form.Label>
-    <Form.Control onBlur={handleName} type="name" placeholder="name" />
+    <Form.Control onBlur={handleName} type="name" placeholder="name" autoComplete="username" required />
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control onBlur={handleEmailChange} type="email" placeholder="Enter email" />
+    <Form.Control onBlur={handleEmailChange} type="email" placeholder="Enter email" autoComplete="useremail" required />
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
@@ -48,7 +71,7 @@ const Register = () => {
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control onBlur={handlePasswordChange} type="password" placeholder="Password" />
+    <Form.Control onBlur={handlePasswordChange} type="password" placeholder="Password"  autoComplete="current-password" required />
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicCheckbox">
    <Link to="/login">
@@ -57,14 +80,16 @@ const Register = () => {
         <div>
             <h6 className="text-danger">{error}</h6>
         </div>
+  {/* <Link to="/home"> */}
   <Button onClick={ () => createUser (name,email, password)} className="login-btn btn" variant="primary" type="submit">
     Register 
   </Button>
+  {/* </Link> */}
 </Form>
         <div>
             <h6 className="d-flex align-items-center">---------------Or---------------</h6>
             <div className="">
-            <button  onClick={signInWithGoogle} className="btn googleSign"> <img src={googleImg} alt="" /> Sign in with Google</button>
+            <button  onClick={handleSignInWithGoogle} className="btn googleSign"> <img src={googleImg} alt="" /> Sign in with Google</button>
             </div>
         </div>
         </div>

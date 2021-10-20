@@ -10,7 +10,7 @@ const Header = () => {
   const {user, logOut} = useAuth();
     return (
         <div>
-             <Navbar collapseOnSelect sticky="top" expand="lg" className="my-nav-bg">
+             <Navbar collapseOnSelect expand="lg" className="my-nav-bg" fixed="top">
   <Container>
   <Navbar.Brand href="/home">
       <img
@@ -37,8 +37,10 @@ const Header = () => {
         <Link className="my-nav-link" to="/login">Login</Link> */}
       { user?.email ? 
         <div>
-        <Link className="my-nav-link me-2" to="/register">{user?.displayName}</Link>
-        <Link onClick={logOut} className="my-nav-link" to="/home">Log out</Link>
+        <Link className="my-nav-link me-2" to="/">{user?.displayName}</Link>
+        <Link onClick={logOut} className="my-nav-link" to="/home">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer w-6 h-6 text-gray-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </Link>
         </div>
         :
         <div>

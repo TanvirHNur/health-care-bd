@@ -4,10 +4,13 @@ import { Redirect, Route } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 
 const PrivateRoute = ({children, ...rest}) => {
-    const {user,loading}=useAuth();
-    if(loading){
-        return <Spinner animation="border" variant="danger" />
-    }
+    const {user, isLoading}=useAuth();
+    if(isLoading){
+        return (
+        <div className="d-flex justify-content-center mt-5">
+            <Spinner className="m-5" animation="border" variant="danger" />
+        </div>
+        )}
     return (
         <Route
         {...rest}

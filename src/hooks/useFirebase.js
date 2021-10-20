@@ -2,7 +2,7 @@
 
 import { getAuth, signInWithPopup, onAuthStateChanged, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import initializeFirebaseAuth from "../componets/login/firebase/firebase-init";
 
 
@@ -10,10 +10,14 @@ initializeFirebaseAuth();
 
 const useFirebase=()=>{
     const  [user,setUser]=useState({});
-    const [error,setError]=useState('')
+    const [error,setError]=useState('');
+    const [isLoading, setIsLoading] = useState(true);
+
     const auth=getAuth();
-    const histroy = useHistory();
     const GoogleProvider=new GoogleAuthProvider();
+    const  histroy=useHistory();
+
+
 
     const signInWithGoogle=()=>{
           return  signInWithPopup(auth, GoogleProvider)
@@ -21,32 +25,40 @@ const useFirebase=()=>{
     }
      
     const createUser=(name, email, password)=>{
-        console.log(email,password,name)
         createUserWithEmailAndPassword(auth,email,password)
         .then( result =>{
-            console.log(result.user)
             setUser(result.user)
             updateProfile(auth.currentUser, {
                 displayName: name,
             })
             setError('Logged in Successfully');
+            window.location.reload();
         })
-        // .then(() => {
-        //     histroy.push('/')
-        // })
+        .finally(() => {
+            histroy.push('/')
+        })
         .catch( error=>{
             setError(error.message);
             console.log(error.message)
         })
     }
 
+    
+    // const location=useLocation();
+    // const redirect_uri= location.state?.from || '/';
+        const url = '/home'
 
     // login
     const login = (email, password) => {
             signInWithEmailAndPassword(auth, email, password)
             .then(result =>{
                 setUser(result.user)
-                setError('Loged in Successfully')
+                setError('Logged in Successfully');
+                // window.location.reload();
+                
+            })
+            .finally( () => {
+                histroy.push('/')
             })
             .catch(error=>{
                 setError(error.message)
@@ -54,11 +66,15 @@ const useFirebase=()=>{
     }
 
     const logOut=()=>{
+        setIsLoading(true);
         signOut(auth)
         .then(()=>{
             setUser({})
-            setError('Log out Successfully')
+            setError('Logged out Successfully')
         })
+        .finally( () => {
+            setIsLoading(false);
+          })
         .catch(error =>{
             setError(error.message)
         })
@@ -69,16 +85,20 @@ const useFirebase=()=>{
             if(user){
                 setUser(user)
             }
+            
+            setIsLoading(false)
         })
-    } , [])
+    } , [auth])
     return {
         user,
         setUser,
+        setError,
         error,
-        setUser,
         createUser,
         login,
         signInWithGoogle,
+        setIsLoading,
+        isLoading,
         logOut
         
     }

@@ -8,25 +8,27 @@ import useAuth from '../../../hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
 
 const Login = () => {
-  const {signInWithGoogle, login, error, setUser, setError}=useAuth();
+  const {signInWithGoogle, login, error, setUser, setError, setIsLoading}=useAuth();
   const [email, setEmail]=useState('');
   const [password, setPassword]=useState('');
 
   const  histroy=useHistory();
   const location=useLocation();
   const redirect_uri= location.state?.from || '/';
-  console.log(location.state?.from)
 
   const handleSignInWithGoogle =() =>{
+          setIsLoading(true)
           signInWithGoogle()
           .then(result => {
             histroy.push(redirect_uri)
             setUser(result.user);
             setError('Logged in Successfully');
-
+        })
+        .finally( () => {
+          setIsLoading(false)
         })
         .catch(error=>{
-            // setError(error.message)
+            setError(error.message)
         })
   }
 
@@ -49,7 +51,7 @@ const Login = () => {
             <h1 className="text-info fs-3">Please Login</h1>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control onBlur={handleEmailChange} type="email" placeholder="Enter email" />
+    <Form.Control onBlur={handleEmailChange} type="email" placeholder="Enter email" autoComplete="useremail" required />
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
     </Form.Text>
@@ -57,7 +59,7 @@ const Login = () => {
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control onBlur={handlePasswordChange} type="password" placeholder="Password" autoComplete="current-password" />
+    <Form.Control onBlur={handlePasswordChange} type="password" placeholder="Password" autoComplete="current-password" required />
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicCheckbox">
    <Link to="register">
@@ -66,9 +68,11 @@ const Login = () => {
         <div>
             <h6 className="text-danger">{error}</h6>
         </div>
-  <Button onClick={ () => login(email, password)}  className="login-btn btn" variant="primary" type="submit">
-    Log in 
-  </Button>
+      {/* <Link to="/home"> */}
+        <Button onClick={ () => login(email, password)}  className="login-btn btn" variant="primary" type="submit">
+         Log in 
+        </Button>
+      {/* </Link> */}
 </Form>
 <div>
             <h6 className="d-flex align-items-center">---------------Or---------------</h6>

@@ -14,7 +14,7 @@ const Blogs = () => {
         .then(data => setBlogs(data))
     } , [])
     return (
-        <div>
+        <div className="pt-5">
             <Link to="/blog">
             <div className="cover col-md-12 container">
                  <img className="img-fluid mt-5 pt-3" src={blogCover} alt="" />

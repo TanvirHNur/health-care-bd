@@ -11,7 +11,7 @@ const FindDoctors = () => {
         } , []);
     return (
         <Row className="m-5">
-            <div className="d-flex justify-content-evenly">
+            <div className="d-flex justify-content-evenly pt-5">
             <h1>Find a Doctor</h1>
             <h1 className="learn-more-btn">Request an Appointment</h1>
             </div>

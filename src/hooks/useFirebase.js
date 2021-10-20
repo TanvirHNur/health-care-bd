@@ -2,7 +2,6 @@
 
 import { getAuth, signInWithPopup, onAuthStateChanged, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router";
 import initializeFirebaseAuth from "../componets/login/firebase/firebase-init";
 
 
@@ -15,7 +14,6 @@ const useFirebase=()=>{
 
     const auth=getAuth();
     const GoogleProvider=new GoogleAuthProvider();
-    const  histroy=useHistory();
 
 
 
@@ -25,44 +23,13 @@ const useFirebase=()=>{
     }
      
     const createUser=(name, email, password)=>{
-        createUserWithEmailAndPassword(auth,email,password)
-        .then( result =>{
-            setUser(result.user)
-            updateProfile(auth.currentUser, {
-                displayName: name,
-            })
-            setError('Logged in Successfully');
-            window.location.reload();
-        })
-        .finally(() => {
-            histroy.push('/')
-        })
-        .catch( error=>{
-            setError(error.message);
-            console.log(error.message)
-        })
+       return createUserWithEmailAndPassword(auth,email,password)
     }
 
-    
-    // const location=useLocation();
-    // const redirect_uri= location.state?.from || '/';
-        const url = '/home'
 
     // login
     const login = (email, password) => {
-            signInWithEmailAndPassword(auth, email, password)
-            .then(result =>{
-                setUser(result.user)
-                setError('Logged in Successfully');
-                // window.location.reload();
-                
-            })
-            .finally( () => {
-                histroy.push('/')
-            })
-            .catch(error=>{
-                setError(error.message)
-            })
+           return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logOut=()=>{
@@ -90,11 +57,13 @@ const useFirebase=()=>{
         })
     } , [auth])
     return {
+        auth,
         user,
         setUser,
         setError,
         error,
         createUser,
+        updateProfile,
         login,
         signInWithGoogle,
         setIsLoading,

@@ -8,7 +8,7 @@ import useAuth from '../../../hooks/useAuth';
 import { useHistory, useLocation } from 'react-router';
 
 const Login = () => {
-  const {signInWithGoogle, login, error, setUser, setError, setIsLoading}=useAuth();
+  const {signInWithGoogle, login, error, setUser, setError, setIsLoading,}=useAuth();
   const [email, setEmail]=useState('');
   const [password, setPassword]=useState('');
 
@@ -32,23 +32,41 @@ const Login = () => {
         })
   }
 
-  const handleForm=(e)=>{
+  const handlelogin = (e) =>{
     e.preventDefault();
-  };
+    login(email, password)
+    .then(result =>{
+                histroy.push(redirect_uri)
+                setUser(result.user)
+                setError('Logged in Successfully');
+                
+            })
+            .finally( () => {
+                // histroy.push('/')
+            })
+            .catch(error=>{
+                setError(error.message)
+            })
+  }
+  
    const handleEmailChange =e=>{
      setEmail(e.target.value);
-     console.log(e.target.value)
    }
    const handlePasswordChange =e=>{
-     setPassword(e.target.value);
-     console.log(e.target.value)
+     if(e.target.value < 6){
+        setError('Password At least 6 character')
+        return;
+     }
+     else{
+      setPassword(e.target.value);
+     }
    }
   
     return (
         <div className="login mx-auto">
             <div>
-            <Form className="container m-5 ms-1" onSubmit={handleForm}>
-            <h1 className="text-info fs-3">Please Login</h1>
+            <Form className="container m-5 ms-1" >
+            <h1 className="text-info fs-3 pt-5">Please Login</h1>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control onBlur={handleEmailChange} type="email" placeholder="Enter email" autoComplete="useremail" required />
@@ -68,11 +86,9 @@ const Login = () => {
         <div>
             <h6 className="text-danger">{error}</h6>
         </div>
-      {/* <Link to="/home"> */}
-        <Button onClick={ () => login(email, password)}  className="login-btn btn" variant="primary" type="submit">
+        <Button onClick={  handlelogin}  className="login-btn btn" variant="primary" type="submit">
          Log in 
         </Button>
-      {/* </Link> */}
 </Form>
 <div>
             <h6 className="d-flex align-items-center">---------------Or---------------</h6>

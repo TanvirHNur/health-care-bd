@@ -11,7 +11,6 @@ const ServiceDetails = () => {
         .then(res=> res.json())
         .then(data=>setServices(data))
     } , [serviceId])
-    // console.log(services)
         const service= services.find( s => s.id == serviceId);
         const {img,title,description} =service || {};
     return (

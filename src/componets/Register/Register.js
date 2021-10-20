@@ -8,7 +8,7 @@ import googleImg from '../../images/google.png';
 import { useHistory, useLocation } from 'react-router';
 
 const Register = () => {
-    const {signInWithGoogle, createUser, error, setIsLoading, setUser,setError}=useAuth();
+    const {signInWithGoogle, createUser, error, setIsLoading, setUser,setError, updateProfile, auth}=useAuth();
     const [name, setName]=useState('');
     const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
@@ -33,29 +33,50 @@ const Register = () => {
     })
 }
 
+const handleCreateUser = e => {
+  e.preventDefault();
+  createUser(name,email,password)
+  .then( result =>{
+    histroy.push(redirect_uri)
+    updateProfile(auth.currentUser, {
+        displayName: name,
+    })
+    .then((result) => {
+      setUser(result.user)
+    })
+    setError('Logged in Successfully');
+    window.location.reload();
+})
+.finally(() => {
+  
+})
+.catch( error=>{
+    setError(error.message);
+})
+}
 
-  const handleForm=(e)=>{
-    e.preventDefault();
-  }
   
   const handleName=e=>{
     setName(e.target.value);
-    console.log(e.target.value)
   }
    const handleEmailChange =e=>{
      setEmail(e.target.value);
-     console.log(e.target.value)
    }
    const handlePasswordChange =e=>{
-     setPassword(e.target.value);
-     console.log(e.target.value)
+    if(e.target.value < 6){
+      setError('Password At least 6 character')
+      return;
+   }
+   else{
+    setPassword(e.target.value);
+   }
    }
     return (
         <div className="login mx-auto">
             <div>
                 
-            <Form className="container m-5 ms-1" onSubmit={handleForm}>
-            <h1 className="text-info fs-3">Please Register</h1>
+            <Form className="container m-5 ms-1">
+            <h1 className="text-info fs-3 pt-5">Please Register</h1>
             <Form.Group className="mb-3" controlId="formBasicName">
     <Form.Label>Name</Form.Label>
     <Form.Control onBlur={handleName} type="name" placeholder="name" autoComplete="username" required />
@@ -80,11 +101,11 @@ const Register = () => {
         <div>
             <h6 className="text-danger">{error}</h6>
         </div>
-  {/* <Link to="/home"> */}
-  <Button onClick={ () => createUser (name,email, password)} className="login-btn btn" variant="primary" type="submit">
+  <Link to="/home">
+  <Button onClick={ handleCreateUser } className="login-btn btn" variant="primary" type="submit">
     Register 
   </Button>
-  {/* </Link> */}
+  </Link>
 </Form>
         <div>
             <h6 className="d-flex align-items-center">---------------Or---------------</h6>
